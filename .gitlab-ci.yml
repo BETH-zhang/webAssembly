@@ -1,0 +1,18 @@
+stages:
+  - deploy
+
+# Pages
+pages:
+  stage: deploy
+  tags:
+    - storyline-scaffold
+  script:
+    - npm install
+    - npm run build-storybook
+    - cp -r site/. public
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 week
+  only:
+    - master # this job will affect only the 'master' branch
